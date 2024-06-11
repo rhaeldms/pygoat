@@ -204,4 +204,4 @@ There are a few lines in urls.py that do not look like these. They're for specia
 
 If theres any doubt or issue feel free to raise an Issue, or correct an existing issue and send PR. Feel free to join the [PyGoat Devs channel](https://t.me/+WpqLBwviT00xZDI1) on telegram
 
-Happy Coding!
+Happy Coding!!! :)
