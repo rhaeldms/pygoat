@@ -31,6 +31,25 @@ jobs:
         with:
           name: bandit-findings
           path: bandit-report.json
+    
+  image_scan:
+    name: Buikd Image and Image Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code 
+        uses: actions/checkout@v4
+      
+      - name: Setup Docker
+        uses: docker-practice/actions-setup-docker@v1
+
+      - name: Build Docker image
+        run: docker build -f Dockerfile -t myapp:latest .
+
+      - name: Docker Scout Scan
+        uses: docker/scout-action@v1.9.3
+      
+      
         
       
 
