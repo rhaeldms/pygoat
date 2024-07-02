@@ -1,6 +1,6 @@
 # Developer's Guide
 
-PyGoat is an intentionally vulnerable web application written using the Python-Django Framework. We welcome Developers to contribute to the project. 
+PyGoat is an intentionally vulnerable web application written using the Python-Django Framework. We welcome Developers to contribute to the project.
 
 ## Project Structure
 
@@ -14,10 +14,10 @@ PyGoat is an intentionally vulnerable web application written using the Python-D
 
 ### Django Folder Structure
 
-The `pygoat` folder is the main folder that contains the Django Project. The project has 2 apps - `introduction` and `pygoat`, and both of them have their own folders. Apart from them there's another folder - `Solutions` which contains solutions to all scenarios. 
+The `pygoat` folder is the main folder that contains the Django Project. The project has 2 apps - `introduction` and `pygoat`, and both of them have their own folders. Apart from them there's another folder - `Solutions` which contains solutions to all scenarios.
 
 * The Inroduction folder contains the main workings of the project and consists of HTML templates, CSS files, and Python code that forms the backend of the application
-* The pygoat folder is the Django default folder and it contains all important settings/configurations essential to running the apps. 
+* The pygoat folder is the Django default folder and it contains all important settings/configurations essential to running the apps.
 * The Solutions folder has `solutions.md` and has solutions to all scenarios presented in application
 
 ### Contents of the `introdution` folder
@@ -31,13 +31,13 @@ The `introduction` folder has a few more folders and files
 * `lab_code` - This contains `test.py` which can be used to test a piece of code before implementing it in the app.
 * `static` - Contains CSS files that give the pages styling
 * `templates` - Contains all HTML templates used by the we app. This has 3 folders
-* * `introduction` - Contains the base html code that is used throughout the app. 
+* * `introduction` - Contains the base html code that is used throughout the app.
 * * `lab` - contains HTML code for the 10 Scenarios that can be solved
 * * `registration` - Contains HTML code for registration and login pages
-* 
+*
 #### Files
 
-* `models.py` - Has different models eg - FAANG, login, etc 
+* `models.py` - Has different models eg - FAANG, login, etc
 * `urls.py` - List of URLS and how to route them
 * `views.py` - Main Backend Code that runs the Web App
 
@@ -45,7 +45,7 @@ The `introduction` folder has a few more folders and files
 
 All templates are located in `pygoat/introduction/templates` and main CSS used for the project is located in `pygoat/introduction/static/introduction/style4.css`
 
-There are 3 folders in templates 
+There are 3 folders in templates
 - introduction - Contains `base.html` and `home.html`
 - Lab - contains 12 folders. All folders except AUTH contain templates that will be displayed for the 10 labs
 - registration - contains templates for registration, login and logout
@@ -84,13 +84,13 @@ def cmd_lab(request):
                 command="nslookup {}".format(domain)
             else:
                 command = "dig {}".format(domain)
-            
+
             try:
                 # output=subprocess.check_output(command,shell=True,encoding="UTF-8")
                 process = subprocess.Popen(
                     command,
                     shell=True,
-                    stdout=subprocess.PIPE, 
+                    stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE)
                 stdout, stderr = process.communicate()
                 data = stdout.decode('utf-8')
@@ -112,7 +112,7 @@ def cmd_lab(request):
 
 The first statement checks if the user is authenticated. If not, it directs to the login page.
 
-The syntax to take input from user through a web page using POST request is 
+The syntax to take input from user through a web page using POST request is
 
 ```python3
 value=request.POST.get('value_name')
@@ -152,7 +152,7 @@ The python3 code from views.py renders this template and a variable 'output' wit
 
 The `output` variable can be accessed from the HTML template by using tags provided in the the [Django Template Language](https://docs.djangoproject.com/en/4.0/ref/templates/language/) (the link contains vital info. It's recommended to check it out)
 
-What this achieves in this case, is - 
+What this achieves in this case, is -
 - Checking if output variable exists
 - If it exists, displays value of output variable in preformatted way
 
@@ -172,11 +172,11 @@ To Add a new function to views.py, please make sure to include a check for authe
 
 ## Understanding routing with `urls.py`
 
-There are 2 `urls.py` files in the project. 
+There are 2 `urls.py` files in the project.
 
 These are located in `pygoat/pygoat` and `pygoat/introduction`
 
-These files are responsibele for routing the website urls to the correct template and backend function. 
+These files are responsibele for routing the website urls to the correct template and backend function.
 
 Let's take an example from a code snippet from `pygoat/introduction/urls.py`
 
@@ -186,7 +186,7 @@ Let's take an example from a code snippet from `pygoat/introduction/urls.py`
     path('xssL',views.xss_lab,name='xss_lab'),
 ```
 
-What this code does - 
+What this code does -
 
 - When user navigates to 127.0.0.1/ in web browser, function views.home is executed
 - When user navigates to 127.0.0.1/xss in web browser, function views.xss is executed

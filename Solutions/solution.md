@@ -1,7 +1,7 @@
-# Solutions to all the Lab Exercise  
+# Solutions to all the Lab Exercise
 
 
-## A1: Injection 
+## A1: Injection
 ### Sql Injection
 The user on accessing the lab is given with a login page,which challenges the user to login as admin.
 The user now has to identify some mechanism to login as admin.
@@ -39,9 +39,9 @@ This should give you the output for both`ns lookup` as well as for the `ifconfig
 ![cmd_inj_2](https://user-images.githubusercontent.com/70275323/154504361-4baa73cb-f73b-44a8-8769-0af2e7b53c24.png)
 
 ### Command Injection Lab 2
-We are given an input form where we can calculate basic arithmetic expressions. Our task is to exploit this functionality and achieve code execution. 
+We are given an input form where we can calculate basic arithmetic expressions. Our task is to exploit this functionality and achieve code execution.
 
-This lab is using `eval()` function in backend which is used to evaluate expression in python. If the expression is a legal python statement, then it will be executed. 
+This lab is using `eval()` function in backend which is used to evaluate expression in python. If the expression is a legal python statement, then it will be executed.
 
 If we submit the expression `1 + 1`, we get the output as `2`. Similarly, on submitting the expression `7 * 7`, we get the output as `49`.
 
@@ -51,11 +51,11 @@ Now, if we submit `os.system("id")`, we get nothing in the output. But if we che
 
 The main aim of this lab is to login as admin, and to achieve this, exploit the lack of `rate limiting` feature in the otp verification flow. You can see that the otp is only of 3 digit(for demo purposes) and neither does the application have any captcha nor any restriction on number of tries for the otp.
 
-Now to send the otp to admins mail you need to figure out the admins mail id. Luckily the admin has left his email id for the developers in the page source. Admin's email id is `admin@pygoat.com` Enter this email in the send otp input box and hit send,you can see that the page says that otp is sent to the email id of the admin. 
+Now to send the otp to admins mail you need to figure out the admins mail id. Luckily the admin has left his email id for the developers in the page source. Admin's email id is `admin@pygoat.com` Enter this email in the send otp input box and hit send,you can see that the page says that otp is sent to the email id of the admin.
 
 In order to exploit the lack of rate limiting , we can try to Brute-force the 3 digit otp.
 
-#### Steps to Brute force: 
+#### Steps to Brute force:
 
 * Open Burpsuite and configure your browser to intercept the web trafic, but dont turn intercept on.
 * Send the otp to the admins mail id with the help of send otp feature.
@@ -81,17 +81,17 @@ Once request is intercepted by burpsuite, click on `actions` and then `send to i
 
 ![bau_1](https://user-images.githubusercontent.com/70275323/154610104-a831f913-4374-49cf-8f2b-dcbaae1e0533.png)
 
-Your intruder screen should look something like this. Parameters enclosed by the `§` symbol will be brute forced. 
+Your intruder screen should look something like this. Parameters enclosed by the `§` symbol will be brute forced.
 
 ![bau_2](https://user-images.githubusercontent.com/70275323/154610112-39cc5fec-d407-4190-bd3f-9f4ee33f6c69.png)
 
-Select payload type as Numbers, enter range as 100-999 and step as 1. Then start attack. 
+Select payload type as Numbers, enter range as 100-999 and step as 1. Then start attack.
 
 ![bau_3](https://user-images.githubusercontent.com/70275323/154610117-7505d2fc-f1a0-418e-b87a-b676e3ecd791.png)
 
 When attack is going on, the correct OTP will have a different response length. In this case its smaller.
 
-We see that OTP value 136 gives us a different lenght. 
+We see that OTP value 136 gives us a different lenght.
 
 ![bau_4](https://user-images.githubusercontent.com/70275323/154610121-29a2abc5-b3b8-49e2-9028-a5850cbaf9d9.png)
 
@@ -137,7 +137,7 @@ Sending data to the server in the form of XML is not actually vulnerable, the vu
 
 ##### The Payload
 
-``` 
+```
 <?xml version='1.0'?>
 <!DOCTYPE comm [
 <!ELEMENT comm (#PCDATA)>
@@ -202,13 +202,13 @@ This results as being logged in as Admin
 
 ![bac_3](https://user-images.githubusercontent.com/70275323/154612904-917c1501-1a8a-49db-90d0-7879235e7eee.png)
 
-#### Solving using Browser 
+#### Solving using Browser
 
 Once again, we log in as `jack:jacktheripper`
 
 ![ba_1](https://user-images.githubusercontent.com/70275323/154613752-e2fc76a1-669b-46b2-a622-62c13c513d5d.png)
 
-In inspect section, change value of admin cookie to 1 and refresh the page. 
+In inspect section, change value of admin cookie to 1 and refresh the page.
 
 ![ba_2](https://user-images.githubusercontent.com/70275323/154613760-6abaa18a-8f27-4c39-bb89-7c0dd320b5f6.png)
 
@@ -227,7 +227,7 @@ This should give you the secret key.
 
 #### Solving with BurpSuite
 
-When request is initially intercepted in BurpSuite, the interceptor tab at the right of the screen should look like this 
+When request is initially intercepted in BurpSuite, the interceptor tab at the right of the screen should look like this
 
 ![sec_1](https://user-images.githubusercontent.com/70275323/154617589-adc11cdb-5a18-49e3-a445-b68442cbc4e0.png)
 
@@ -286,7 +286,7 @@ Try to flip the bit of the admin from ```...admin\x94K\x00... to ...admin\x94K\x
 
 ## A9:Using Components with Know Vulnerability
 
-The user on accessing the lab is provided with a feature to convert yaml files into json objects. The user needs to choose an yaml file and click upload to get the json data. There is also a get version feature which tells the user the version of the library the app uses. 
+The user on accessing the lab is provided with a feature to convert yaml files into json objects. The user needs to choose an yaml file and click upload to get the json data. There is also a get version feature which tells the user the version of the library the app uses.
 
 ##### Exploiting the vulnerability.
 
@@ -311,7 +311,7 @@ The user on accessing the lab is given with a login page which says the log have
 * The log has been exposed in ```/debug route```
 * This can be found out with subdomain brute-forcing or just by guess
 * On seeing the Log try to get the required login details as there is a leak and the logging is improperly handled.
-* On looking at the log we can see a get request ot the server that has a username and password to it 
+* On looking at the log we can see a get request ot the server that has a username and password to it
 ``` INFO "GET /a10_lab?username=Hacker&password=Hacker HTTP/1.1" 301 0 ```
 * Now use the credentials to log in .
 
@@ -335,14 +335,14 @@ But there is a large design flaw. One can get all the tickets by creating multip
 
 If the sign up process is lame, then this process can be automated. Strong verification/kyc verification needs to be taken in such situations .
 
-## A10 : SSRF 
-This websites serves some vlog, user need to figuer it out how this process is going 
+## A10 : SSRF
+This websites serves some vlog, user need to figuer it out how this process is going
 
 * open dev tool and inspect the buttons
 ![ssrf_pic1](./img/pic1.png)
 * Here we can see there is a hidden input tag which is taking file path of the blog as a parameter.
 * now, if the path is not filltered correctly we can put file path of any file and access that.We just have to change the value.
-* some example -- 
+* some example --
 
 ![url.py](./img/pic2.png)
 ![url_img](./img/pic3.png)
@@ -350,9 +350,9 @@ This websites serves some vlog, user need to figuer it out how this process is g
 #### Now about our main Objective, finding the .env file
 * normaly .env file is used to store all important credentials and configurations
 * Usally this hidden file is saved a base directory
-* So , this an trial and error method of searching 
+* So , this an trial and error method of searching
 * example : .env , ../.env, ../../.env
-* solution :  ( ../.env) 
+* solution :  ( ../.env)
 ![img4](./img/img4.png)
 
 
@@ -392,13 +392,13 @@ This results as being logged in as Admin
 
 ![bac_3](https://user-images.githubusercontent.com/70275323/154612904-917c1501-1a8a-49db-90d0-7879235e7eee.png)
 
-#### Solving using Browser 
+#### Solving using Browser
 
 Once again, we log in as `jack:jacktheripper`
 
 ![ba_1](https://user-images.githubusercontent.com/70275323/154613752-e2fc76a1-669b-46b2-a622-62c13c513d5d.png)
 
-In inspect section, change value of admin cookie to 1 and refresh the page. 
+In inspect section, change value of admin cookie to 1 and refresh the page.
 
 ![ba_2](https://user-images.githubusercontent.com/70275323/154613760-6abaa18a-8f27-4c39-bb89-7c0dd320b5f6.png)
 
@@ -433,21 +433,21 @@ This results as being logged in as Admin
 ![brokenaccess25](https://user-images.githubusercontent.com/70275323/163707622-8cb3f1d7-2185-43b1-84c1-0c66591bc2f6.png)
 
 **Lab 3**
-#### We have an admin credential and a normal user credentails 
+#### We have an admin credential and a normal user credentails
 - We can 1st login using admin credential, then we can see there is a page at /broken_access_controle/secret containing secret
 - ![image](https://user-images.githubusercontent.com/75058161/177593540-c299ac0a-35a7-41d1-b64e-5ef143a927bb.png)
 - ![image](https://user-images.githubusercontent.com/75058161/177593818-2adfa56e-05e7-4315-acc0-e90ed93aaefe.png)
-- Now if we logout from admin account and login to user account, we can't see the option for secret anymore. 
+- Now if we logout from admin account and login to user account, we can't see the option for secret anymore.
 - Unfortunately if we browse to /broken_access_controle/secret we can still access the page because no authentication check was implemented at that page.
 #### If real case senario hacker won't have admin credential, but he can still brute force with some existing text-list or common path dictionary
-- Some tools to bruteforce file path 
+- Some tools to bruteforce file path
   - [GoBuster](https://www.kali.org/tools/gobuster/)
   - [Burpsuit](https://portswigger.net/burp)
 
 ## 2021-A2:Cryptographic Failure
 
 **Lab 1**
-- Give material --> some user id and hash 
+- Give material --> some user id and hash
 - ##### [ step- 1 ] Identification of the hash
    - the hash is 32 charecter long
    - most probably the hash is from MD* family
@@ -455,13 +455,13 @@ This results as being logged in as Admin
    - we can use [hash_identifier](https://hashes.com/en/tools/hash_identifier) to identify the hash
 - ##### [ step - 2 ]  Search the hash in google
    - Got the hash of admin password, ie : `admin1234`
-- ##### Using online Hash lookup service 
+- ##### Using online Hash lookup service
    - Using online hash decoder we can serach for commmon hash password.
-- Final output 
+- Final output
    - ![image](https://user-images.githubusercontent.com/75058161/177600545-bdbad8bc-f884-4ffe-b0f2-15ff555d95a4.png)
 #
 **Lab 2**
-- Given material --> some user id and hash 
+- Given material --> some user id and hash
 - ##### [ step- 1 ] Identification of the hash
    - the hash is 64 charecter long
    - most probably the hash is SHA256
@@ -470,20 +470,20 @@ This results as being logged in as Admin
 - ##### [ step - 2 ]  Search the hash in google
    - Didn't got any result
    - ![image](https://user-images.githubusercontent.com/75058161/177693323-a915bf6a-0df0-44b6-8573-ade92b6a64d8.png)
-- ##### Using online Hash lookup service 
+- ##### Using online Hash lookup service
    - Using online hash decoder we can serach for commmon hash password.
    - No result found [ in this case ]
 - ##### Using some password cracking tools [ Jhon the ripper ] or [ hashcat ]
    - No result
-- ##### From the code we can see a custom function is used 
-   - After reversing the admin hash and searching in online dictionary 
+- ##### From the code we can see a custom function is used
+   - After reversing the admin hash and searching in online dictionary
    - ![image](https://user-images.githubusercontent.com/75058161/177696721-7587bcc8-d483-47ac-a0cb-a3cab07ca868.png)
    - So `password777` is passowrd for admin, this gives use the admin access
 - ##### Other solution ( bcause it quite difficult to guess custom hash function ) :
-   - Brute force the login page ( no delay implemented so it would be better idea) using burp, Zed etc. 
+   - Brute force the login page ( no delay implemented so it would be better idea) using burp, Zed etc.
 #
 **Lab 3**
-- Given material --> Normal user credential 
+- Given material --> Normal user credential
 - admin user name --> unkown, password --> unkown
 - ##### Some ovservation
    - ![image](https://user-images.githubusercontent.com/75058161/177697795-aa7071d9-b672-4527-af55-231f3612dad7.png)
@@ -497,8 +497,8 @@ This results as being logged in as Admin
 **lab-2**
 - Given an utility to apply some math expression on an image
 - ![image](https://user-images.githubusercontent.com/75058161/178036849-aae96b02-9633-47e5-a605-0a07ffb17919.png)
-- From the lab descripting we found this module uses pillow 8 
-- After some OSINT and dorking 
+- From the lab descripting we found this module uses pillow 8
+- After some OSINT and dorking
 - ![image](https://user-images.githubusercontent.com/75058161/178037399-7ac55275-6af8-45d6-a0da-e679a2744cd8.png)
 - Let's try `exec(exit())`
 - ![image](https://user-images.githubusercontent.com/75058161/178037554-e8935a19-538d-41ae-9a1e-59d31e50c080.png)
@@ -517,17 +517,17 @@ This results as being logged in as Admin
 {% endfor %}`
 
 add a post which includes this content
- 
+
 The result would look like this -->
 ![Screenshot from 2022-06-10 21-04-29](https://user-images.githubusercontent.com/75058161/173106213-9e218e81-d4b2-4447-9570-4aa8de3dea88.png)
 
 ### 2021-A8: Software and Data Integrity failure
 This data is a demonstration that how an XSS attack can deceive users to download any malicious file. The lab consists of a page to download a file, and a direct link to that page is also given (from a hacker). Let's download both files and compare the hash before opening that.
 ![image](https://user-images.githubusercontent.com/75058161/190912308-1d26fb2e-2c6c-4c67-bf2a-9bb0f4abbfd0.png)
-So as we can see the hashes don't match. So as a user we should always cross-check signatures for verification of Data Integrity. 
+So as we can see the hashes don't match. So as a user we should always cross-check signatures for verification of Data Integrity.
 
-More more information about the attack itself you can look into the url --> 
-```http://127.0.0.1:8000/2021/A8/lab2?username=user+%3Cscript%3Edocument.getElementById%28%22download_link%22%29.setAttribute%28%22href%22%2C%22%2Fstatic%2Ffake.txt%22%29%3B%3C%2Fscript%3Euser+%3Cscript%3Edocument.getElementById%28%22download_link%22%29.setAttribute%28%22href%22%2C%22%2Fstatic%2Ffake.txt%22%29%3B%3C%2Fscript%3E``` 
+More more information about the attack itself you can look into the url -->
+```http://127.0.0.1:8000/2021/A8/lab2?username=user+%3Cscript%3Edocument.getElementById%28%22download_link%22%29.setAttribute%28%22href%22%2C%22%2Fstatic%2Ffake.txt%22%29%3B%3C%2Fscript%3Euser+%3Cscript%3Edocument.getElementById%28%22download_link%22%29.setAttribute%28%22href%22%2C%22%2Fstatic%2Ffake.txt%22%29%3B%3C%2Fscript%3E```
 It have a file url and XXS attack to replace the actual file url.
 
 ### 2021-A9: Insufficient Logging & Monitoring
@@ -539,8 +539,7 @@ So we can Enter user name anything and password = ```pass\nERROR:root:2022-07-04
 It will create one fake log and also it can cause log overflow also by passing lots of data in injection.
 
 ### 2021:A10 : SSRF lab2
-This lab have a local page at ```/ssrf_target``` that can be only accesed from localhost. Now if we do ```python manage.py runserver``` that page will be accisible 
-but if we start the server by ```python manage.py runserver 0:8000``` the page wont be accessble from ```http://[your ip]/ssrf_target``` 
+This lab have a local page at ```/ssrf_target``` that can be only accesed from localhost. Now if we do ```python manage.py runserver``` that page will be accisible
+but if we start the server by ```python manage.py runserver 0:8000``` the page wont be accessble from ```http://[your ip]/ssrf_target```
 
-Now comes the utility that takes the URL and fetch the data, if we give the localhost url to this utility it can fetch the data easily and we can see the page from outside localhost. 
-
+Now comes the utility that takes the URL and fetch the data, if we give the localhost url to this utility it can fetch the data easily and we can see the page from outside localhost.

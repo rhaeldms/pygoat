@@ -26,7 +26,7 @@ def ssrf_code_converter(code):
             space = extracted_code[i].split('return')[0]
             k = extracted_code[i].split('{')[1].split('}')[0]
             extracted_code[i] = space + "return {"+k+"}"
-    
+
     list_output= list_output + extracted_code
     output_Code = "\n".join(list_output)
 

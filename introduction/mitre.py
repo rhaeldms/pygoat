@@ -35,57 +35,57 @@ def mitre_top2(request):
 def mitre_top3(request):
     if request.method == 'GET':
         return render(request, 'mitre/mitre_top3.html')
-        
+
 @authentication_decorator
 def mitre_top4(request):
     if request.method == 'GET':
         return render(request, 'mitre/mitre_top4.html')
-        
+
 @authentication_decorator
 def mitre_top5(request):
     if request.method == 'GET':
         return render(request, 'mitre/mitre_top5.html')
-        
+
 @authentication_decorator
 def mitre_top6(request):
     if request.method == 'GET':
         return render(request, 'mitre/mitre_top6.html')
-        
+
 @authentication_decorator
 def mitre_top7(request):
     if request.method == 'GET':
         return render(request, 'mitre/mitre_top7.html')
-        
+
 @authentication_decorator
 def mitre_top8(request):
     if request.method == 'GET':
         return render(request, 'mitre/mitre_top8.html')
-        
+
 @authentication_decorator
 def mitre_top9(request):
     if request.method == 'GET':
         return render(request, 'mitre/mitre_top9.html')
-        
+
 @authentication_decorator
 def mitre_top10(request):
     if request.method == 'GET':
         return render(request, 'mitre/mitre_top10.html')
-        
+
 @authentication_decorator
 def mitre_top11(request):
     if request.method == 'GET':
         return render(request, 'mitre/mitre_top11.html')
-        
+
 @authentication_decorator
 def mitre_top12(request):
     if request.method == 'GET':
         return render(request, 'mitre/mitre_top12.html')
-        
+
 @authentication_decorator
 def mitre_top13(request):
     if request.method == 'GET':
         return render(request, 'mitre/mitre_top13.html')
-        
+
 @authentication_decorator
 def mitre_top14(request):
     if request.method == 'GET':
@@ -205,7 +205,7 @@ def csrf_transfer_monei_api(request,recipent,amount):
                     recipent.save()
                     User[0].balance = User[0].balance - int(amount)
                     User[0].save()
-        return redirect('/mitre/9/lab/transaction') 
+        return redirect('/mitre/9/lab/transaction')
     else:
         return redirect ('/mitre/9/lab/transaction')
 
@@ -232,13 +232,13 @@ def mitre_lab_17(request):
 def command_out(command):
     process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     return process.communicate()
-    
+
 
 @csrf_exempt
 def mitre_lab_17_api(request):
     if request.method == "POST":
         ip = request.POST.get('ip')
-        command = "nmap " + ip 
+        command = "nmap " + ip
         res, err = command_out(command)
         res = res.decode()
         err = err.decode()

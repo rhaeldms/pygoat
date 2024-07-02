@@ -44,7 +44,7 @@
 <button class="coll2 btn btn-info" style= "position : fixed ; right :200px; bottom : 7px">View Code</button>
 
 <div class="lab code">
-   <code>   
+   <code>
     def ssrf_lab(request):</br>
 &emsp;if request.user.is_authenticated:</br>
 &emsp;&emsp;if request.method=="GET":</br>
@@ -59,10 +59,10 @@
 &emsp;&emsp;&emsp;&emsp;return render(request,"Lab/ssrf/ssrf_lab.html",{"blog":data})</br>
 &emsp;&emsp;&emsp;except:</br>
 &emsp;&emsp;&emsp;&emsp;return render(request, "Lab/ssrf/ssrf_lab.html", {"blog": "No blog found"})</br>
-&emsp;else:</br>    
+&emsp;else:</br>
 &emsp;&emsp;return redirect('login')</br>
    </code>
-    
+
 </div>
 <div>
 

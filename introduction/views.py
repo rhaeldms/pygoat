@@ -72,7 +72,7 @@ def home(request):
     else:
         return redirect('login')
 
-## authentication check decurator function 
+## authentication check decurator function
 def authentication_decorator(func):
     def function(*args, **kwargs):
         if args[0].user.is_authenticated:
@@ -101,11 +101,11 @@ def xss_lab(request):
             return render(request,'Lab/XSS/xss_lab.html', {'query': q})
     else:
         return redirect('login')
-        
+
 
 def xss_lab2(request):
     if request.user.is_authenticated:
-        
+
         username = request.POST.get('username', '')
         if username:
             username = username.strip()
@@ -118,7 +118,7 @@ def xss_lab2(request):
         return render(request, 'Lab/XSS/xss_lab_2.html', context)
     else:
         return redirect('login')
-    
+
 def xss_lab3(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -130,8 +130,8 @@ def xss_lab3(request):
             return render(request, 'Lab/XSS/xss_lab_3.html',context)
         else:
             return render(request, 'Lab/XSS/xss_lab_3.html')
-            
-    else:        
+
+    else:
         return redirect('login')
 
 #***********************************SQL****************************************************************#
@@ -162,7 +162,7 @@ def sql_lab(request):
                 except:
                     print("\nin except\n")
                     return render(
-                        request, 
+                        request,
                         'Lab/SQL/sql_lab.html',
                         {
                             "wrongpass":password,
@@ -174,7 +174,7 @@ def sql_lab(request):
                     return render(request, 'Lab/SQL/sql_lab.html',{"user1":user})
                 else:
                     return render(
-                        request, 
+                        request,
                         'Lab/SQL/sql_lab.html',
                         {
                             "wrongpass":password,
@@ -320,7 +320,7 @@ def auth_lab_login(request):
 
 def auth_lab_logout(request):
     rendered = render_to_string('Lab/AUTH/auth_lab.html',context={'err_msg':'Logout successful'})
-    response = HttpResponse(rendered)    
+    response = HttpResponse(rendered)
     response.delete_cookie('userid')
     return response
 
@@ -340,16 +340,16 @@ def ba_lab(request):
         if name:
             if request.COOKIES.get('admin') == "1":
                 return render(
-                    request, 
-                    'Lab/BrokenAccess/ba_lab.html', 
+                    request,
+                    'Lab/BrokenAccess/ba_lab.html',
                     {
                         "data":"0NLY_F0R_4DM1N5",
                         "username": "admin"
                     })
             elif login.objects.filter(user='admin',password=password):
                 html = render(
-                    request, 
-                    'Lab/BrokenAccess/ba_lab.html', 
+                    request,
+                    'Lab/BrokenAccess/ba_lab.html',
                     {
                         "data":"0NLY_F0R_4DM1N5",
                         "username": "admin"
@@ -358,8 +358,8 @@ def ba_lab(request):
                 return html
             elif login.objects.filter(user=name,password=password):
                 html = render(
-                request, 
-                'Lab/BrokenAccess/ba_lab.html', 
+                request,
+                'Lab/BrokenAccess/ba_lab.html',
                 {
                     "not_admin":"No Secret key for this User",
                     "username": name
@@ -395,7 +395,7 @@ def robots(request):
         return response
 
 def error(request):
-    return 
+    return
 
 
 #******************************************************  Command Injection  ***********************************************************************#
@@ -417,13 +417,13 @@ def cmd_lab(request):
                 command="nslookup {}".format(domain)
             else:
                 command = "dig {}".format(domain)
-            
+
             try:
                 # output=subprocess.check_output(command,shell=True,encoding="UTF-8")
                 process = subprocess.Popen(
                     command,
                     shell=True,
-                    stdout=subprocess.PIPE, 
+                    stdout=subprocess.PIPE,
                     stderr=subprocess.PIPE)
                 stdout, stderr = process.communicate()
                 data = stdout.decode('utf-8')
@@ -447,7 +447,7 @@ def cmd_lab2(request):
     if request.user.is_authenticated:
         if (request.method=="POST"):
             val=request.POST.get('val')
-            
+
             print(val)
             try:
                 output = eval(val)
@@ -551,7 +551,7 @@ def a9_lab(request):
                 file=request.FILES["file"]
                 try :
                     data = yaml.load(file,yaml.Loader)
-                    
+
                     return render(request,"Lab/A9/a9_lab.html",{"data":data})
                 except:
                     return render(request, "Lab/A9/a9_lab.html", {"data": "Error"})
@@ -567,7 +567,7 @@ def get_version(request):
 def a9_lab2(request):
     if not request.user.is_authenticated:
         return redirect('login')
-    
+
     if request.method == "GET":
         return render (request,"Lab/A9/a9_lab2.html")
     elif request.method == "POST":
@@ -580,7 +580,7 @@ def a9_lab2(request):
             # function_str = "convert(r+g, '1')"
             output = ImageMath.eval(function_str,img = img, b=b, r=r, g=g)
 
-            # saving the image 
+            # saving the image
             buffered = BytesIO()
             output.save(buffered, format="JPEG")
             img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
@@ -664,7 +664,7 @@ def a10_lab2(request):
         else:
             logging.error(f"{now}:{ip}:{user}")
             return render(request, "Lab/A10/a10_lab2.html", {"error": " Wrong username or Password"})
-        
+
 
 
 #*********************************************************A11*************************************************#
@@ -699,7 +699,7 @@ def insec_desgine_lab(request):
                         Tickets.append(ticket_code)
                         T = tickits(user = request.user, tickit = ticket_code)
                         T.save()
-                    
+
                     return render(request,"Lab/A11/a11_lab.html",{"tickets":Tickets})
                 else:
                     return render(request,"Lab/A11/a11_lab.html",{"error":"You can have atmost 5 tickits","tickets":Tickets})
@@ -732,7 +732,7 @@ def insec_desgine_lab(request):
 def a1_broken_access(request):
     if not request.user.is_authenticated:
         return redirect('login')
-    
+
     return render(request,"Lab_2021/A1_BrokenAccessControl/broken_access.html")
 
 
@@ -742,7 +742,7 @@ def a1_broken_access_lab_1(request):
         pass
     else:
         return redirect('login')
-    
+
     name = request.POST.get('name')
     password = request.POST.get('pass')
     print(password)
@@ -750,16 +750,16 @@ def a1_broken_access_lab_1(request):
     if name:
         if request.COOKIES.get('admin') == "1":
             return render(
-                request, 
-                'Lab_2021/A1_BrokenAccessControl/broken_access_lab_1.html', 
+                request,
+                'Lab_2021/A1_BrokenAccessControl/broken_access_lab_1.html',
                 {
                     "data":"0NLY_F0R_4DM1N5",
                     "username": "admin"
                 })
         elif (name=='jack' and password=='jacktheripper'): # Will implement hashing here
             html = render(
-            request, 
-            'Lab_2021/A1_BrokenAccessControl/broken_access_lab_1.html', 
+            request,
+            'Lab_2021/A1_BrokenAccessControl/broken_access_lab_1.html',
             {
                 "not_admin":"No Secret key for this User",
                 "username": name
@@ -778,7 +778,7 @@ def a1_broken_access_lab_2(request):
         pass
     else:
         return redirect('login')
-    
+
     name = request.POST.get('name')
     password = request.POST.get('pass')
     user_agent = request.META['HTTP_USER_AGENT']
@@ -786,11 +786,11 @@ def a1_broken_access_lab_2(request):
     # print(name)
     # print(password)
     print(user_agent)
-    if name :  
+    if name :
         if (user_agent == "pygoat_admin"):
             return render(
-                request, 
-                'Lab_2021/A1_BrokenAccessControl/broken_access_lab_2.html', 
+                request,
+                'Lab_2021/A1_BrokenAccessControl/broken_access_lab_2.html',
                 {
                     "data":"0NLY_F0R_4DM1N5",
                     "username": "admin",
@@ -798,8 +798,8 @@ def a1_broken_access_lab_2(request):
                 })
         elif ( name=='jack' and password=='jacktheripper'): # Will implement hashing here
             html = render(
-            request, 
-            'Lab_2021/A1_BrokenAccessControl/broken_access_lab_2.html', 
+            request,
+            'Lab_2021/A1_BrokenAccessControl/broken_access_lab_2.html',
             {
                 "not_admin":"No Secret key for this User",
                 "username": name,
@@ -840,7 +840,7 @@ def a1_broken_access_lab3_secret(request):
 def injection(request):
     if not request.user.is_authenticated:
         return redirect('login')
-    
+
     return render(request,"Lab_2021/A3_Injection/injection.html")
 
 
@@ -874,7 +874,7 @@ def injection_sql_lab(request):
 
             except:
                 return render(
-                    request, 
+                    request,
                     'Lab_2021/A3_Injection/sql_lab.html',
                     {
                         "wrongpass":password,
@@ -885,7 +885,7 @@ def injection_sql_lab(request):
                 return render(request, 'Lab_2021/A3_Injection/sql_lab.html',{"user1":user})
             else:
                 return render(
-                    request, 
+                    request,
                     'Lab_2021/A3_Injection/sql_lab.html',
                     {
                         "wrongpass":password,
@@ -979,13 +979,13 @@ def ssti_lab(request):
                 {% block content %}{% block title %}\
                 <title>SSTI-Blogs</title>\
                 {% endblock %}"
-            
+
             blog = prepend_code + blog + "{% endblock %}"
             new_blog = Blogs.objects.create(author = request.user, blog_id = id)
-            new_blog.save() 
+            new_blog.save()
             dirname = os.path.dirname(__file__)
             filename = os.path.join(dirname, f"templates/Lab_2021/A3_Injection/Blogs/{id}.html")
-            file = open(filename, "w+") 
+            file = open(filename, "w+")
             file.write(blog)
             file.close()
             return redirect(f'blog/{id}')
@@ -1104,13 +1104,13 @@ def sec_misconfig_lab3(request):
 
 # - ------------------------Identification and Authentication Failures--------------------------------
 @authentication_decorator
-def auth_failure(request):    
+def auth_failure(request):
     if request.method == "GET":
         return render(request,"Lab_2021/A7_auth_failure/a7.html")
 
 
-## used admin password --> 2022_in_pygoat@pygoat.com  
-# ## not a easy password to be brute forced 
+## used admin password --> 2022_in_pygoat@pygoat.com
+# ## not a easy password to be brute forced
 @authentication_decorator
 def auth_failure_lab2(request):
     if request.method == "GET":
@@ -1124,7 +1124,7 @@ def auth_failure_lab2(request):
             print(type(user.lockout_cooldown))
             if user.is_locked == True and user.lockout_cooldown > datetime.datetime.now():
                 return render(request,"Lab_2021/A7_auth_failure/lab2.html", {"is_locked":True})
-            
+
             try:
                 ph = PasswordHasher()
                 ph.verify(user.password, password)
@@ -1201,7 +1201,7 @@ def auth_failure_lab3(request):
 @authentication_decorator
 def A7_discussion(request):
     return render(request,"playground/A7/index.html")
-        
+
 ## ---------------------Software and Data Integrity Failures-------------------------------------------
 @authentication_decorator
 def software_and_data_integrity_failure(request):
@@ -1227,5 +1227,5 @@ def software_and_data_integrity_failure_lab3(request):
 
 @authentication_decorator
 def A6_discussion(request):
-    
+
     return render(request,"playground/A6/index.html")

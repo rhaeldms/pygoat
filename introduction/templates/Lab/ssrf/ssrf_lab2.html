@@ -18,7 +18,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
-    
+
     {% if response %}
         <div style="width:70%;overflow:scroll;background-color:#000">{{response | safe}}<div>
     {% endif %}
@@ -28,7 +28,7 @@
 <button class="coll2 btn btn-info" style= "position : fixed ; right :200px; bottom : 7px">View Code</button>
 
 <div class="lab code">
-   <code>   
+   <code>
     @authentication_decorator<br>
 def ssrf_lab2(request):<br>
 &emsp;if request.method == "GET":<br>
@@ -42,7 +42,7 @@ def ssrf_lab2(request):<br>
 &emsp;&emsp;except:<br>
 &emsp;&emsp;&emsp;return render(request, "Lab/ssrf/ssrf_lab2.html", {"error": "Invalid URL"})<br>
    </code>
-    
+
 </div>
 <div>
 

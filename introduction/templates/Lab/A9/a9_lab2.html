@@ -17,7 +17,7 @@
         <li>convert(r+g+b, 'L')</li>
         <li>convert(r-g, '1')</li>
     </ul>
-    
+
     <form enctype="multipart/form-data" id="a9_form2" method="POST" style="display: flex;flex-direction: column;align-items: center;margin-bottom: 50px;">
         <input type="file" name="file" id="a9_file" />
         <input type="text" name="function" id="a9_function" placeholder="function"/>
@@ -35,13 +35,13 @@
 
     <button class="coll2 btn btn-info" style= "position : fixed ; right :330px; bottom : 7px">Hint</button>
     <div class="lab code">
-        This lab uses pillow==8.0.0 package, google for vulnerability 
+        This lab uses pillow==8.0.0 package, google for vulnerability
     </div>
 
     <button class="coll2 btn btn-info" style= "position : fixed ; right :200px; bottom : 7px">View Code</button>
 
     <div class="lab code">
-    <code>   
+    <code>
         def a9_lab2(request):<br>
         &emsp;if not request.user.is_authenticated:<br>
         &emsp;&emsp;return redirect('login')<br>
@@ -56,12 +56,12 @@
         &emsp;&emsp;&emsp;img = img.convert("RGB")<br>
         &emsp;&emsp;&emsp;r,g,b  = img.split()<br>
         &emsp;&emsp;&emsp;output = ImageMath.eval(function_str,img = img, b=b, r=r, g=g)<br>
-        
+
         &emsp;&emsp;&emsp;# saving the image <br>
         &emsp;&emsp;&emsp;buffered = BytesIO()<br>
         &emsp;&emsp;&emsp;output.save(buffered, format="JPEG")<br>
         &emsp;&emsp;&emsp;img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")<br>
-        
+
         &emsp;&emsp;&emsp;bufferd_ref = BytesIO()<br>
         &emsp;&emsp;&emsp;img.save(bufferd_ref, format="JPEG")<br>
         &emsp;&emsp;&emsp;img_str_ref = base64.b64encode(bufferd_ref.getvalue()).decode("utf-8")<br>
@@ -74,7 +74,7 @@
         &emsp;&emsp;&emsp;print(e)<br>
         &emsp;&emsp;&emsp;return render(request, "Lab/A9/a9_lab2.html", {"data":"Please Upload a file", "error":True})<br>
     </code>
-        
+
     </div>
     <div>
 

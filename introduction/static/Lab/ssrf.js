@@ -67,7 +67,7 @@ function checkcode(){
         body: formdata,
         redirect: 'follow'
       };
-      
+
     fetch("api/ssrf", requestOptions)
     .then(response => response.text())
     .then((result) => {
