@@ -14,8 +14,8 @@ name: Bandit-Aula
 on:
   workflow_dispatch:
 
-  jobs:
-  sast_scan:
+jobs:
+   sast_scan:
     name: Run Bandit Scan
     runs-on: ubuntu-latest
 
